@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>JavaScript DOM Manipulation Tasks</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 20px;
+    }
+    input, button {
+      margin: 5px 0;
+      padding: 8px;
+      font-size: 16px;
+      width: 100%;
+      box-sizing: border-box;
+    }
+    .output, #infoDisplay {
+      margin-top: 10px;
+      padding: 10px;
+      border: 1px solid #aaa;
+      background-color: #f0f0f0;
+      white-space: pre-wrap;
+    }
+    #textSample {
+      margin-top: 10px;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>JavaScript DOM Manipulation Examples</h1>
+
+  <!-- 1. Basic Info Form -->
+  <h2>1. Basic Information Form</h2>
+  <form id="infoForm">
+    <label>Name:</label>
+    <input type="text" id="name" placeholder="Enter name" required>
+    <label>Email:</label>
+    <input type="email" id="email" placeholder="Enter email" required>
+    <label>Age:</label>
+    <input type="number" id="age" placeholder="Enter age" required>
+    <button type="submit">Submit</button>
+  </form>
+  <div id="infoDisplay" class="output"></div>
+
+  <!-- 2. Change Image -->
+  <h2>2. Change Image</h2>
+  <img id="myImage" src="./img1.jpeg" width="150" alt="Image not found">
+  <br>
+  <button id="changeImageBtn">Change Image</button>
+
+  <!-- 3. Font Size Adjuster -->
+  <h2>3. Font Size Adjuster</h2>
+  <div id="textSample" style="font-size: 16px;">
+    This is sample text to increase or decrease font size.
+  </div>
+  <button id="increaseFont">Increase Font Size</button>
+  <button id="decreaseFont">Decrease Font Size</button>
+
+  <!-- 4. Current Date & Time -->
+  <h2>4. Current Date & Time</h2>
+  <div id="dateTime" class="output"></div>
+
+  <script>
+    // 1. Display form data
+    document.getElementById('infoForm').addEventListener('submit', function (e) {
+      e.preventDefault();
+      const name = document.getElementById('name').value;
+      const email = document.getElementById('email').value;
+      const age = document.getElementById('age').value;
+
+      document.getElementById('infoDisplay').innerText =
+        `Name: ${name}\nEmail: ${email}\nAge: ${age}`;
+    });
+
+    // 2. Image Toggle on Click
+    let toggle = true;
+      document.getElementById('changeImageBtn').addEventListener('click', () => {
+        const img = document.getElementById('myImage');
+        img.src = toggle ? "./img2.jpeg" : "./img1.jpeg";
+        toggle = !toggle;
+      });
+
+
+    // 3. Font size adjuster
+    let fontSize = 16;
+    document.getElementById('increaseFont').addEventListener('click', () => {
+      fontSize += 2;
+      document.getElementById('textSample').style.fontSize = fontSize + 'px';
+    });
+
+    document.getElementById('decreaseFont').addEventListener('click', () => {
+      if (fontSize > 8) {
+        fontSize -= 2;
+        document.getElementById('textSample').style.fontSize = fontSize + 'px';
+      }
+    });
+
+    // 4. Show current date and time
+    function updateDateTime() {
+      const now = new Date();
+      document.getElementById('dateTime').innerText = now.toLocaleString();
+    }
+    setInterval(updateDateTime, 1000);
+    updateDateTime(); // initial call
+  </script>
+
+</body>
+</html>
